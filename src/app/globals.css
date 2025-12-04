@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-geri-navy: #1e293b;
+  --color-geri-rose: #f1a2b0;  
+  --color-geri-gold: #d4af37;
+  
+  --font-family-serif: "Playfair Display", serif;
+  --font-family-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-family-sans);
+    color: var(--color-geri-navy);
+    line-height: 1.6;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-serif);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  ::selection {
+    background-color: var(--color-geri-gold);
+    color: white;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--color-geri-gold);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--color-geri-gold) 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-rose {
+    background: linear-gradient(135deg, var(--color-geri-rose) 0%, #ff6b9d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
