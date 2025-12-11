@@ -83,14 +83,6 @@ export default function Footer() {
           <p className="text-white/60 text-sm">
             © 2025 Maison GÉRI. Tous droits réservés.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/mentions-legales" className="text-white/60 hover:text-white text-sm transition-colors duration-300">
-              Mentions légales
-            </Link>
-            <Link href="/privacy" className="text-white/60 hover:text-white text-sm transition-colors duration-300">
-              Politique de confidentialité
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
