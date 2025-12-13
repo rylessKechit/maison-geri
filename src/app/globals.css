@@ -1,72 +1,235 @@
 @import "tailwindcss";
 
+/* 
+  GÉRI - Luxury Minimalist Design System
+  Inspired by Louis Vuitton, Van Cleef & Arpels
+  Ultra-refined, institutional luxury
+*/
+
 @theme {
-  --color-geri-navy: #1e293b;
-  --color-geri-rose: #f1a2b0;  
-  --color-geri-gold: #d4af37;
+  /* Color System - Ultra Minimal Luxury */
+  --color-primary: #0a0a0a;           /* Deep black - primary text */
+  --color-secondary: #525252;         /* Neutral gray - secondary text */
+  --color-accent: #b8860b;           /* Dark gold - subtle accent only */
+  --color-geri-navy: #131B4C;        /* GÉRI Navy - brand signature */
+  --color-geri-accent: #d4af37;      /* GÉRI Gold accent */
+  --color-background: #ffffff;        /* Pure white - primary background */
+  --color-surface: #fafafa;          /* Off-white - subtle surfaces */
+  --color-border: #e5e5e5;           /* Light gray - minimal borders */
   
-  --font-family-serif: "Playfair Display", serif;
-  --font-family-sans: "Inter", sans-serif;
+  /* Typography - Institutional Serif + Clean Sans */
+  --font-family-display: "Cormorant Garamond", "Times", serif;  /* Elegant display serif */
+  --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Spacing System - Generous, Mathematical */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 2rem;     /* 32px */
+  --space-lg: 4rem;     /* 64px */
+  --space-xl: 8rem;     /* 128px */
+  --space-xxl: 12rem;   /* 192px */
+  
+  /* Layout Grid */
+  --max-width: 1200px;
+  --content-width: 800px;
+  
+  /* Animation System - Slow, Sophisticated */
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --easing: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @layer base {
+  /* Reset & Fundamentals */
+  * {
+    box-sizing: border-box;
+  }
+  
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
-    font-family: var(--font-family-sans);
-    color: var(--color-geri-navy);
-    line-height: 1.6;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    margin: 0;
+    font-family: var(--font-family-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-primary);
+    background-color: var(--color-background);
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
+  /* Typography Hierarchy - Luxury Restraint */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-serif);
-    font-weight: 700;
+    font-family: var(--font-family-display);
+    font-weight: 400;
     line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    margin: 0;
   }
 
-  ::selection {
-    background-color: var(--color-geri-gold);
-    color: white;
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
   }
 
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible,
-  a:focus-visible {
-    outline: 2px solid var(--color-geri-gold);
+  h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-secondary);
+    line-height: 1.8;
+  }
+
+  /* Interactive Elements - Subtle Luxury */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--easing);
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  button {
+    border: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--easing);
+  }
+
+  /* Focus States - Luxury Accessibility */
+  *:focus-visible {
+    outline: 1px solid var(--color-accent);
     outline-offset: 2px;
+  }
+
+  /* Selection - Minimal */
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
   }
 }
 
+@layer components {
+  /* Layout Components */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+  
+  .container-narrow {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  /* Button System - Minimal Luxury */
+  .btn-primary {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-primary);
+    transition: all var(--duration-normal) var(--easing);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background-color: transparent;
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-border);
+    transition: all var(--duration-normal) var(--easing);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-primary);
+  }
+
+  /* Utility Classes for Tailwind compatibility */
+  .text-primary { color: var(--color-primary); }
+  .text-secondary { color: var(--color-secondary); }
+  .text-accent { color: var(--color-accent); }
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-background { background-color: var(--color-background); }
+  .bg-surface { background-color: var(--color-surface); }
+  .border-border { border-color: var(--color-border); }
+  .font-display { font-family: var(--font-family-display); }
+  .font-body { font-family: var(--font-family-body); }
+  
+  /* GÉRI Brand Colors */
+  .bg-geri-navy { background-color: var(--color-geri-navy); }
+  .text-geri-navy { color: var(--color-geri-navy); }
+  .text-geri-accent { color: var(--color-geri-accent); }
+  .bg-geri-accent { background-color: var(--color-geri-accent); }
+  .border-geri-navy { border-color: var(--color-geri-navy); }
+}
+
 @layer utilities {
-  .text-gradient-gold {
-    background: linear-gradient(135deg, var(--color-geri-gold) 0%, #ffd700 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Spacing Utilities */
+  .section-spacing {
+    padding: var(--space-xxl) 0;
+  }
+  
+  .section-spacing-sm {
+    padding: var(--space-xl) 0;
   }
 
-  .text-gradient-rose {
-    background: linear-gradient(135deg, var(--color-geri-rose) 0%, #ff6b9d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Animation Utilities - Luxury Restraint */
+  .animate-fade-in {
+    animation: fadeIn var(--duration-slow) var(--easing) forwards;
   }
 
+  .animate-slide-up {
+    animation: slideUp var(--duration-slow) var(--easing) forwards;
+  }
+
+  /* Hover Effects - Minimal */
   .hover-lift {
-    transition: transform 0.3s ease;
+    transition: transform var(--duration-normal) var(--easing);
   }
 
   .hover-lift:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 
+  /* Reduced Motion Support */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -75,18 +238,42 @@
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes fadeInUp {
+/* Animations - Sophisticated & Slow */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  .no-print {
+    display: none !important;
   }
 }
