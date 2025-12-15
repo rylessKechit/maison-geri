@@ -34,15 +34,6 @@ export default function Footer() {
             <h3 className="text-lg font-serif font-light mb-8 tracking-wide">Navigation</h3>
             <nav className="space-y-4">
               <Link 
-                href="/collections" 
-                className="group block text-white/80 hover:text-white transition-colors duration-300"
-              >
-                <span className="relative">
-                  Toutes les Collections
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
-                </span>
-              </Link>
-              <Link 
                 href="/bubble" 
                 className="group block text-white/80 hover:text-white transition-colors duration-300"
               >

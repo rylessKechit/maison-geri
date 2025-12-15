@@ -115,21 +115,6 @@ export default function Header() {
             {/* Menu Navigation */}
             <nav className="p-6">
               <div className="space-y-2">
-                
-                {/* Toutes les Collections */}
-                <Link 
-                  href="/collections" 
-                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="relative">
-                    Toutes les Collections
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
-                  </span>
-                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
 
                 {/* Bubble */}
                 <Link 
