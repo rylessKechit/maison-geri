@@ -1,88 +1,133 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-border">
-      <div className="container py-16">
+    <footer className="bg-[#131B4C] text-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
         
-        {/* Main Footer Content */}
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+        {/* Section principale */}
+        <div className="py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
           
-          {/* Brand */}
-          <div>
-            <Link href="/" className="inline-block mb-6">
-              <h3 className="font-display text-xl font-light tracking-wider text-primary">
-                GÉRI
-              </h3>
+          {/* Logo et description */}
+          <div className="md:col-span-1">
+            <Link href="/" className="inline-block mb-8">
+              <Image 
+                src="/logo-geri.webp" 
+                alt="GÉRI" 
+                width={140}
+                height={45}
+                className="h-12 w-auto"
+              />
             </Link>
-            <p className="text-sm text-secondary leading-relaxed mb-6 max-w-xs">
-              Maison de joaillerie française créant des pièces d'exception 
-              dans le respect des traditions artisanales.
+            <p className="text-white/80 font-light leading-relaxed mb-6">
+              Maison de joaillerie française alliant tradition séculaire et vision contemporaine. 
+              Chaque création naît dans nos ateliers parisiens.
             </p>
-            <p className="text-xs text-secondary/60 tracking-wide uppercase">
-              Entièrement fabriqué en France
+            <p className="text-white/60 text-sm font-light tracking-wide uppercase">
+              Depuis 4 générations • Paris
             </p>
           </div>
 
           {/* Navigation */}
-          <div>
-            <h4 className="text-sm font-medium text-primary mb-6 tracking-wide uppercase">
-              Navigation
-            </h4>
+          <div className="md:col-span-1">
+            <h3 className="text-lg font-serif font-light mb-8 tracking-wide">Navigation</h3>
             <nav className="space-y-4">
-              <Link href="/collections" className="block text-sm text-secondary hover:text-primary transition-colors">
-                Collections
+              <Link 
+                href="/collections" 
+                className="group block text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <span className="relative">
+                  Toutes les Collections
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
-              <Link href="/bubble" className="block text-sm text-secondary hover:text-primary transition-colors">
-                Bubble
+              <Link 
+                href="/bubble" 
+                className="group block text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <span className="relative">
+                  Bubble
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
-              <Link href="/kiss-me" className="block text-sm text-secondary hover:text-primary transition-colors">
-                Kiss Me
+              <Link 
+                href="/kiss-me" 
+                className="group block text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <span className="relative">
+                  Kiss Me
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
-              <Link href="/maison" className="block text-sm text-secondary hover:text-primary transition-colors">
-                Maison
-              </Link>
-              <Link href="/contact" className="block text-sm text-secondary hover:text-primary transition-colors">
-                Contact
+              <Link 
+                href="/maison" 
+                className="group block text-white/80 hover:text-white transition-colors duration-300"
+              >
+                <span className="relative">
+                  Maison GÉRI
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </Link>
             </nav>
           </div>
 
           {/* Contact */}
-          <div>
-            <h4 className="text-sm font-medium text-primary mb-6 tracking-wide uppercase">
-              Atelier Parisien
-            </h4>
-            <div className="space-y-4 text-sm text-secondary">
-              <p>Sur rendez-vous uniquement</p>
-              <p>
-                <a href="mailto:contact@maison-geri.fr" className="hover:text-primary transition-colors">
-                  contact@maison-geri.fr
-                </a>
-              </p>
-              <div className="pt-4">
-                <Link href="/contact" className="btn-primary text-xs">
-                  Prendre Rendez-vous
+          <div className="md:col-span-1">
+            <h3 className="text-lg font-serif font-light mb-8 tracking-wide">Contact</h3>
+            <div className="space-y-6">
+              <div>
+                <p className="text-white/60 text-sm font-light tracking-wide uppercase mb-2">
+                  Atelier Parisien
+                </p>
+                <p className="text-white/80 font-light">
+                  Sur rendez-vous uniquement
+                </p>
+              </div>
+              
+              <div>
+                <Link 
+                  href="mailto:contact@maison-geri.fr"
+                  className="group text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  <span className="relative">
+                    contact@maison-geri.fr
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                 </Link>
               </div>
+
+              <Link 
+                href="/contact"
+                className="inline-block bg-white/10 hover:bg-white hover:text-[#131B4C] text-white px-8 py-3 transition-all duration-300 font-light tracking-wide border border-white/20 hover:border-white"
+              >
+                Prendre Rendez-vous
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-xs text-secondary/60 mb-4 md:mb-0">
-            © {new Date().getFullYear()} Maison GÉRI. Tous droits réservés.
+        {/* Ligne de séparation */}
+        <div className="border-t border-white/20"></div>
+
+        {/* Copyright */}
+        <div className="py-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-white/60 text-sm font-light">
+            © 2025 Maison GÉRI. Tous droits réservés.
           </p>
-          
-          {/* Legal Links */}
-          <div className="flex space-x-6 text-xs text-secondary/60">
-            <a href="#" className="hover:text-secondary transition-colors">
-              Mentions Légales
-            </a>
-            <a href="#" className="hover:text-secondary transition-colors">
+          <div className="flex items-center space-x-8 mt-4 md:mt-0">
+            <Link 
+              href="/mentions-legales" 
+              className="text-white/60 hover:text-white text-sm transition-colors duration-300"
+            >
+              Mentions légales
+            </Link>
+            <Link 
+              href="/confidentialite" 
+              className="text-white/60 hover:text-white text-sm transition-colors duration-300"
+            >
               Confidentialité
-            </a>
+            </Link>
           </div>
         </div>
       </div>

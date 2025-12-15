@@ -10,7 +10,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      // Changer le background seulement quand on sort complètement du hero (100vh)
+      setIsScrolled(window.scrollY > window.innerHeight - 100)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -31,14 +32,16 @@ export default function Header() {
 
   return (
     <>
-      {/* Header - Style Louis Vuitton avec fond bleu GÉRI */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-geri-navy">
+      {/* Header - avec changement transparent/bleu */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 hover:bg-[#131B4C] ${
+        isScrolled ? 'bg-[#131B4C]' : 'bg-transparent'
+      }`}>
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             
-            {/* Hamburger Menu - Gauche - Blanc sur bleu */}
+            {/* Hamburger Menu - Gauche - Blanc */}
             <button 
-              className="flex items-center space-x-2 text-white hover:text-geri-accent transition-colors duration-300"
+              className="flex items-center space-x-2 text-white hover:text-geri-accent transition-colors duration-300 cursor-pointer"
               onClick={() => setIsMenuOpen(true)}
               aria-label="Ouvrir le menu"
             >
@@ -48,8 +51,8 @@ export default function Header() {
               <span className="text-sm font-medium tracking-wide uppercase">Menu</span>
             </button>
 
-            {/* Logo Centré - Blanc */}
-            <Link href="/" className="absolute left-1/2 transform -translate-x-1/2">
+            {/* Logo Centré - MAISON GÉRI */}
+            <Link href="/" className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-2">
               <Image 
                 src="/logo-geri.webp" 
                 alt="GÉRI" 
@@ -60,7 +63,7 @@ export default function Header() {
               />
             </Link>
 
-            {/* Contact - Droite - Blanc sur bleu */}
+            {/* Contact - Droite - Blanc */}
             <Link 
               href="/contact"
               className="text-sm font-medium tracking-wide text-white hover:text-geri-accent transition-colors duration-300 uppercase"
@@ -71,19 +74,24 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Menu Overlay - Style Louis Vuitton */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[100]">
-          {/* Background Overlay */}
-          <div 
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          
-          {/* Menu Panel */}
-          <div className="absolute left-0 top-0 h-full w-full max-w-md bg-white shadow-2xl">
+      {/* Menu Overlay - avec transitions */}
+      <div className={`fixed inset-0 z-[100] transition-all duration-300 ${
+        isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+      }`}>
+        {/* Background Overlay */}
+        <div 
+          className={`absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${
+            isMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+        
+        {/* Menu Panel */}
+        <div className={`absolute left-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
             {/* Menu Header avec fond bleu */}
-            <div className="flex items-center justify-between p-6 border-b border-border bg-geri-navy">
+            <div className="flex items-center justify-between p-6 border-b border-border bg-[#131B4C]">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
                 <Image 
                   src="/logo-geri.webp" 
@@ -94,7 +102,7 @@ export default function Header() {
                 />
               </Link>
               <button 
-                className="text-white hover:text-geri-accent transition-colors p-2"
+                className="text-white hover:text-geri-accent transition-colors p-2 cursor-pointer"
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Fermer le menu"
               >
@@ -106,67 +114,82 @@ export default function Header() {
 
             {/* Menu Navigation */}
             <nav className="p-6">
-              <div className="space-y-8">
+              <div className="space-y-2">
                 
-                {/* Collections */}
-                <div>
-                  <h3 className="text-lg font-display font-light text-primary mb-4">Collections</h3>
-                  <div className="space-y-3 ml-4">
-                    <Link 
-                      href="/collections" 
-                      className="block text-secondary hover:text-primary transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Toutes les Collections
-                    </Link>
-                    <Link 
-                      href="/bubble" 
-                      className="block text-secondary hover:text-primary transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Bubble
-                    </Link>
-                    <Link 
-                      href="/kiss-me" 
-                      className="block text-secondary hover:text-primary transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Kiss Me
-                    </Link>
-                  </div>
-                </div>
+                {/* Toutes les Collections */}
+                <Link 
+                  href="/collections" 
+                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="relative">
+                    Toutes les Collections
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
+                  </span>
+                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
 
-                {/* Maison */}
-                <div>
-                  <Link 
-                    href="/maison" 
-                    className="block text-lg font-display font-light text-primary hover:text-accent transition-colors duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    La Maison
-                  </Link>
-                </div>
+                {/* Bubble */}
+                <Link 
+                  href="/bubble" 
+                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="relative">
+                    Bubble
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
+                  </span>
+                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
 
-                {/* Services */}
-                <div>
-                  <h3 className="text-lg font-display font-light text-primary mb-4">Services</h3>
-                  <div className="space-y-3 ml-4">
-                    <Link 
-                      href="/contact" 
-                      className="block text-secondary hover:text-primary transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Prendre Rendez-vous
-                    </Link>
-                    <Link 
-                      href="/contact#sur-mesure" 
-                      className="block text-secondary hover:text-primary transition-colors duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Création sur Mesure
-                    </Link>
-                  </div>
-                </div>
+                {/* Kiss Me */}
+                <Link 
+                  href="/kiss-me" 
+                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="relative">
+                    Kiss Me
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
+                  </span>
+                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+
+                {/* Maison GÉRI */}
+                <Link 
+                  href="/maison" 
+                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="relative">
+                    Maison GÉRI
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
+                  </span>
+                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+
+                {/* Contact */}
+                <Link 
+                  href="/contact" 
+                  className="group flex items-center justify-between py-3 text-xl font-display font-light text-primary hover:text-accent transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="relative">
+                    Contact
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-current transition-all duration-500 group-hover:w-full"></span>
+                  </span>
+                  <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
               </div>
 
               {/* Bottom Section */}
@@ -189,7 +212,6 @@ export default function Header() {
             </nav>
           </div>
         </div>
-      )}
     </>
   )
 }
